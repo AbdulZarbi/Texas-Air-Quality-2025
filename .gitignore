@@ -6,8 +6,9 @@
 .RData
 .Rproj.user/
 
-# Secrets
+# Secrets and local tool settings
 .env
+.claude/settings.local.json
 
 # Large or licensed raw downloads go here; README explains how to get them
 data/raw/large/
