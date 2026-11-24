@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# R / RStudio session files (personal, not reproducible)
+.Rhistory
+.RData
+.Rproj.user/
+
+# Secrets
+.env
+
+# Large or licensed raw downloads go here; README explains how to get them
+data/raw/large/
