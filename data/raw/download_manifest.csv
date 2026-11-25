@@ -1,0 +1,3 @@
+pollutant,parameter_code,source_url,epa_last_modified,downloaded_on,zip_md5,national_rows,texas_rows,texas_duplicate_keys,texas_counties,texas_sites,texas_monitors,first_date,data_through,sites_through_dec,earliest_site_last,all_text_utf8
+pm25,88101,https://aqs.epa.gov/aqsweb/airdata/daily_88101_2025.zip,"Mon, 13 Jul 2026 15:47:43 GMT",2026-11-23,62ff40bc3b57cc7a0acf793f5b727308,758834,39306,0,29,57,71,2025-01-01,2025-12-31,55,2025-02-24,TRUE
+ozone,44201,https://aqs.epa.gov/aqsweb/airdata/daily_44201_2025.zip,"Mon, 13 Jul 2026 15:47:42 GMT",2026-11-23,0289161f445d39fb5a624fd31852035e,381023,25698,0,34,73,73,2025-01-01,2025-12-31,71,2025-02-19,TRUE
