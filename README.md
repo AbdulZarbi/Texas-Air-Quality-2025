@@ -4,7 +4,7 @@ Which Texas counties had the most days above AQI 100 for ozone and PM2.5 in 2025
 
 Harris, Tarrant, Collin and Denton had the most ozone days, and El Paso had the most PM2.5 days. The health side surprised me: counties with more ozone days had *lower* COPD rates. They also had lower smoking rates, which ozone can't explain, so the pattern says more about how big metro counties differ from small ones than about ozone. Once I adjusted for county population, the COPD link weakened to ρ = −0.26 and its confidence interval included zero.
 
-Tools: R (tidyverse: readr, dplyr, tidyr; ggplot2 + patchwork for figures) · RStudio · Git/GitHub · Tableau Public (map planned)
+Tools: R (tidyverse: readr, dplyr, tidyr; ggplot2 + patchwork for figures) · RStudio · Git/GitHub · Tableau Public ([interactive county map](https://public.tableau.com/app/profile/abdul.zarbi/viz/texas_air_quality_map_2025/Dashboard1))
 
 ![Ozone exceedance days vs COPD, smoking and county size](output/figures/fig3_ozone_copd_smoking_2025.png)
 
@@ -21,6 +21,8 @@ Air data: EPA AirData daily files, all Texas monitors, 2025-01-01 to 2025-12-31 
 | Ranked counties | Monthly pattern |
 |---|---|
 | ![Exceedance days by county](output/figures/fig1_county_exceedance_days_2025.png) | ![Exceedance days by month](output/figures/fig2_monthly_exceedance_days_2025.png) |
+
+**Interactive map:** [all 254 Texas counties on Tableau Public](https://public.tableau.com/app/profile/abdul.zarbi/viz/texas_air_quality_map_2025/Dashboard1). Switch between ozone and PM2.5 and hover over a county for its days, sites, highest reading and COPD/asthma rates. Counties shown in gray had no monitor; that means they weren't measured, not that their air was clean.
 
 ## Recommendation
 
@@ -45,6 +47,7 @@ What each download contained (rows, counties, checksums) is recorded in `data/ra
 | 4 | `04_download_places.R` | Downloads CDC PLACES for Texas (asthma, COPD, smoking; age-adjusted and crude) |
 | 5 | `05_health_compare.R` | Joins air to health by county FIPS code. Spearman correlation with 95% CI, p-values, Benjamini–Hochberg correction, and partial correlations adjusted for smoking or adult population |
 | 6 | `06_figures.R` | The three figures in this README |
+| 7 | `07_tableau_export.R` | One row per county and pollutant for all 254 counties (counties without a monitor are marked, not set to 0) for the Tableau map |
 
 Each script stops with an error if a check fails (duplicate rows, missing values, unexpected counts). The headline numbers were also recomputed a second way in base R.
 
@@ -71,18 +74,19 @@ A few choices that affect the numbers:
    install.packages(c("readr", "dplyr", "tidyr", "purrr", "ggplot2", "patchwork",
                       "ggrepel", "ragg", "scales", "jsonlite"))
    ```
-3. Open each script in `scripts/` in order (01 to 06) and click **Source**. Scripts 01 and 04 download data from EPA and CDC, so they need an internet connection. They fetch whatever version EPA and CDC publish that day; compare the checksums in the two manifest files to see whether your data matches the version used here.
+3. Open each script in `scripts/` in order (01 to 07) and click **Source**. Scripts 01 and 04 download data from EPA and CDC, so they need an internet connection. They fetch whatever version EPA and CDC publish that day; compare the checksums in the two manifest files to see whether your data matches the version used here.
 
-Outputs land in `data/clean/`, `output/tables/` and `output/figures/`.
+Outputs land in `data/clean/`, `output/tables/` and `output/figures/`. To rebuild the map, open `tableau/texas_air_quality_map_2025.twbx` in Tableau Public; it was built from `output/tables/tableau_county_map_2025.csv`.
 
 ## Repository layout
 
 ```
 data/raw/        original downloads + manifests (large EPA files gitignored)
 data/clean/      tidy daily tables from 02_clean.R
-scripts/         numbered R steps, 01 to 06
-output/tables/   county, monthly and correlation tables (every number above)
+scripts/         numbered R steps, 01 to 07
+output/tables/   county, monthly, correlation and map tables (every number above)
 output/figures/  README figures
+tableau/         Tableau Public workbook for the county map
 reports/         Quarto write-up (planned)
 ```
 
@@ -91,7 +95,7 @@ reports/         Quarto write-up (planned)
 - [x] Download, clean and analyze all Texas PM2.5 and ozone monitors for 2025
 - [x] Add CDC PLACES county health estimates and compare
 - [x] Figures and findings
-- [ ] Tableau Public map
+- [x] Tableau Public map
 
 ## License
 
