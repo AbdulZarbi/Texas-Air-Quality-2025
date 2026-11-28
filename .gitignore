@@ -10,5 +10,8 @@
 .env
 .claude/settings.local.json
 
+# Tableau autosave / recovery files
+*.twbr
+
 # Large or licensed raw downloads go here; README explains how to get them
 data/raw/large/
